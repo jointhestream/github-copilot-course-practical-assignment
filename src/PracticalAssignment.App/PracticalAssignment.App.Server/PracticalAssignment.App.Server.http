@@ -1,6 +1,0 @@
-@PracticalAssignment.App.Server_HostAddress = http://localhost:5241
-
-GET {{PracticalAssignment.App.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
