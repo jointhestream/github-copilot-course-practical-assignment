@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiClient } from '../../services/apiClient';
 import { CourseDetailsDto, LessonDto } from '../../types';
@@ -17,7 +17,7 @@ export default function AdminLessonsPage() {
   const [content, setContent] = useState('');
   const [order, setOrder] = useState(1);
 
-  const loadCourse = () => {
+  const loadCourse = useCallback(() => {
     setLoading(true);
     apiClient.get<CourseDetailsDto>(`/courses/${id}`)
       .then(c => {
@@ -26,9 +26,9 @@ export default function AdminLessonsPage() {
       })
       .catch(() => setError('Failed to load course'))
       .finally(() => setLoading(false));
-  };
+  }, [id]);
 
-  useEffect(() => { loadCourse(); }, [id]);
+  useEffect(() => { loadCourse(); }, [loadCourse]);
 
   const resetForm = () => {
     setEditId(null);
