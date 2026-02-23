@@ -1,4 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
 using CourseHub.Api.Data;
 using CourseHub.Api.Dtos;
 using CourseHub.Api.Entities;
@@ -24,7 +23,7 @@ public class EnrollmentsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Enroll([FromBody] EnrollRequestDto dto)
     {
-        var userId = Guid.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
         var course = await _db.Courses.FindAsync(dto.CourseId);
         if (course == null) return NotFound(new { message = "Course not found." });
@@ -56,7 +55,7 @@ public class EnrollmentsController : ControllerBase
     [HttpGet("mine")]
     public async Task<IActionResult> Mine()
     {
-        var userId = Guid.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
         var enrollments = await _db.Enrollments
             .Where(e => e.UserId == userId)
