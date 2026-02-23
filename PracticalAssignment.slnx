@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/App/">
+    <Project Path="src/PracticalAssignment.App/practicalassignment.app.client/practicalassignment.app.client.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+    <Project Path="src/PracticalAssignment.App/PracticalAssignment.App.Server/PracticalAssignment.App.Server.csproj" Id="bdd90a05-f710-45d0-9d3b-bb6ddfb58e4e" />
+  </Folder>
+</Solution>
